@@ -4,6 +4,7 @@ w32dbg_wrap_lib = static_library(
   'rzw32dbg_wrap',
   w32dbg_wrap_src,
   include_directories : w32dbg_wrap_inc,
+  pic: true,
 )
 w32dbg_wrap_dep = declare_dependency(
   link_with : w32dbg_wrap_lib,

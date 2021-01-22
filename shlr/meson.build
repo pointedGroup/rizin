@@ -167,7 +167,8 @@ if not capstone_dep.found() or not get_option('use_sys_capstone')
       '-DCAPSTONE_HAS_TMS320C64X',
     ],
     include_directories: capstone_includes,
-    implicit_include_directories: false
+    implicit_include_directories: false,
+    pic: true,
   )
 
   capstone_dep = declare_dependency(
@@ -201,6 +202,7 @@ if not tree_sitter_dep.found() or not get_option('use_sys_tree_sitter')
     include_directories: tree_sitter_inc,
     implicit_include_directories: false,
     c_args: tree_sitter_cflags,
+    pic: true,
   )
 
   tree_sitter_dep = declare_dependency(
@@ -223,7 +225,8 @@ shell_parser_inc = [platform_inc, include_directories('rizin-shell-parser/src/tr
 libshell_parser = static_library('shell_parser', shell_parser_files,
   include_directories: shell_parser_inc,
   dependencies: tree_sitter_dep.partial_dependency(includes: true),
-  implicit_include_directories: true
+  implicit_include_directories: true,
+  pic: true,
 )
 
 shell_parser_dep = declare_dependency(
@@ -243,7 +246,8 @@ bochs_inc = [platform_inc, include_directories('bochs/include')]
 librzbochs = static_library('rzbochs', bochs_files,
   dependencies: [rz_util_dep],
   include_directories: bochs_inc,
-  implicit_include_directories: false
+  implicit_include_directories: false,
+  pic: true,
 )
 
 bochs_dep = declare_dependency(
@@ -266,7 +270,8 @@ java_inc = [platform_inc, include_directories('java')]
 librzjava = static_library('rzjava', java_files,
   dependencies: [rz_util_dep],
   include_directories: java_inc,
-  implicit_include_directories: false
+  implicit_include_directories: false,
+  pic: true,
 )
 
 java_dep = declare_dependency(
@@ -288,7 +293,8 @@ qnx_inc = [platform_inc, include_directories('qnx/include')]
 librzqnx = static_library('rzqnx', qnx_files,
   dependencies: [rz_socket_dep, rz_util_dep],
   include_directories: qnx_inc,
-  implicit_include_directories: false
+  implicit_include_directories: false,
+  pic: true,
 )
 
 qnx_dep = declare_dependency(
@@ -309,7 +315,8 @@ tcc_inc = [platform_inc, include_directories('tcc')]
 librztcc = static_library('rztcc', tcc_files,
   dependencies: [rz_util_dep],
   include_directories: tcc_inc,
-  implicit_include_directories: false
+  implicit_include_directories: false,
+  pic: true,
 )
 
 tcc_dep = declare_dependency(
@@ -330,7 +337,8 @@ if not lz4_dep.found() or not get_option('use_sys_lz4')
 
   librzlz4 = static_library('rzlz4', lz4_files,
     include_directories: lz4_inc,
-    implicit_include_directories: false
+    implicit_include_directories: false,
+    pic: true,
   )
 
   lz4_dep = declare_dependency(
@@ -437,7 +445,8 @@ if not zip_dep.found() or not get_option('use_sys_zip')
   librzzip = static_library('rzzip', zip_files,
     include_directories: zip_inc,
     implicit_include_directories: false,
-    dependencies: zlib_dep
+    dependencies: zlib_dep,
+    pic: true,
   )
 
   zip_dep = declare_dependency(
@@ -462,7 +471,8 @@ winkd_inc = [platform_inc, include_directories('winkd')]
 librzwinkd = static_library('rzwinkd', winkd_files,
   dependencies: [rz_crypto_dep, rz_hash_dep, rz_socket_dep, rz_util_dep],
   include_directories: winkd_inc,
-  implicit_include_directories: false
+  implicit_include_directories: false,
+  pic: true,
 )
 
 winkd_dep = declare_dependency(
@@ -481,7 +491,8 @@ ar_inc = [platform_inc, include_directories(['ar'])]
 librzar = static_library('rzar', ar_files,
   dependencies: [rz_util_dep],
   include_directories: ar_inc,
-  implicit_include_directories: false
+  implicit_include_directories: false,
+  pic: true,
 )
 
 ar_dep = declare_dependency(
@@ -508,7 +519,8 @@ mpc_inc = [platform_inc, include_directories(['mpc'])]
 
 libmpc = static_library('rzmpc', mpc_files,
   include_directories: mpc_inc,
-  implicit_include_directories: false
+  implicit_include_directories: false,
+  pic: true,
 )
 
 mpc_dep = declare_dependency(
@@ -525,7 +537,8 @@ yxml_inc = [platform_inc, include_directories(['yxml'])]
 
 libyxml = static_library('rzyxml', yxml_files,
   include_directories: yxml_inc,
-  implicit_include_directories: false
+  implicit_include_directories: false,
+  pic: true,
 )
 
 yxml_dep = declare_dependency(

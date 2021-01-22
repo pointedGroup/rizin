@@ -10,6 +10,7 @@ ptrace_wrap_src = ['src/ptrace_wrap.c']
 ptrace_wrap_lib = static_library('ptrace_wrap',
                           ptrace_wrap_src,
                           include_directories: ptrace_wrap_inc,
+                          pic: true,
                           dependencies: [thread_dep, rz_util_dep])
 
 ptrace_wrap_dep = declare_dependency(link_with: ptrace_wrap_lib, include_directories: ptrace_wrap_inc)

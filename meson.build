@@ -414,7 +414,8 @@ if not zlib_dep.found() or not get_option('use_sys_zlib')
 
   librzzlib = static_library('rzzlib', zlib_files,
     include_directories: zlib_inc,
-    implicit_include_directories: false
+    implicit_include_directories: false,
+    pic: true,
   )
 
   zlib_dep = declare_dependency(
@@ -488,6 +489,7 @@ install_headers(sdb_inc_files, install_dir: rizin_incdir / 'sdb')
 librzsdb = static_library('rzsdb', sdb_files,
   include_directories: sdb_inc,
   implicit_include_directories: false,
+  pic: true,
 )
 
 sdb_dep = declare_dependency(
@@ -521,7 +523,8 @@ librzspp = static_library('rzspp', spp_files,
   dependencies: sdb_dep,
   include_directories: spp_inc,
   c_args: ['-DHAVE_R_UTIL', '-DUSE_R2=1'],
-  implicit_include_directories: false
+  implicit_include_directories: false,
+  pic: true,
 )
 
 spp_dep = declare_dependency(
