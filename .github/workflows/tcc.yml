@@ -19,6 +19,7 @@ jobs:
     name: ubuntu-tcc-test
     runs-on: ubuntu-latest
     steps:
+    # TODO: need to add support for TCC in meson
     - name: Checkout TinyCC repository
       run: |
           git clone https://repo.or.cz/tinycc.git
@@ -40,20 +41,19 @@ jobs:
       with:
           repository: rizinorg/rizin-testbins
           path: test/bins
-
-    - name: Configure, build and install
+    - name: Meson setup
       env:
           CC: tcc
-      run: |
-          ./configure --prefix=/usr --with-compiler=tcc
-          make
-          sudo make install
-
+      run: meson --prefix=/usr build
+    - name: Ninja build and install
+      run: ninja -C build install
     - name: Install test dependencies
       run: |
           sudo apt-get --assume-yes install python3-wheel python3-setuptools
           python3 -m pip install --user 'git+https://github.com/rizinorg/rz-pipe#egg=rzpipe&subdirectory=python'
 
+    - name: Run unit tests
+      run: ninja -C build test
     - name: Run tests
       env:
         PKG_CONFIG_PATH: /usr/lib/x86_64-linux-gnu/pkgconfig
